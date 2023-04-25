@@ -31,6 +31,7 @@ public class PesquisarVideo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         NomePesquisarVideoTextField = new javax.swing.JTextField();
         javax.swing.JButton ConcluirPesquisarVideoButton = new javax.swing.JButton();
+        javax.swing.JButton PesquisarVideoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,13 @@ public class PesquisarVideo extends javax.swing.JFrame {
             }
         });
 
+        PesquisarVideoButton.setText("Pesquisar");
+        PesquisarVideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisarVideoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,14 +71,16 @@ public class PesquisarVideo extends javax.swing.JFrame {
                 .addGap(116, 116, 116))
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel2)
-                .addGap(56, 56, 56)
-                .addComponent(NomePesquisarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PesquisarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ConcluirPesquisarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(56, 56, 56)
+                        .addComponent(NomePesquisarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 35, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(ConcluirPesquisarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,9 +91,11 @@ public class PesquisarVideo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(NomePesquisarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(ConcluirPesquisarVideoButton)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConcluirPesquisarVideoButton)
+                    .addComponent(PesquisarVideoButton))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -94,8 +106,13 @@ public class PesquisarVideo extends javax.swing.JFrame {
     }//GEN-LAST:event_NomePesquisarVideoTextFieldActionPerformed
 
     private void ConcluirPesquisarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConcluirPesquisarVideoButtonActionPerformed
+      
         dispose();
     }//GEN-LAST:event_ConcluirPesquisarVideoButtonActionPerformed
+
+    private void PesquisarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarVideoButtonActionPerformed
+        System.out.println("Nome - " + NomePesquisarVideoTextField.getText());
+    }//GEN-LAST:event_PesquisarVideoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,10 +142,8 @@ public class PesquisarVideo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PesquisarVideo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PesquisarVideo().setVisible(true);
         });
     }
 

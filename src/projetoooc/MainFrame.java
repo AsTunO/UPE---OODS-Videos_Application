@@ -24,6 +24,8 @@ public class MainFrame extends javax.swing.JFrame {
         CriarUsuárioButton = new javax.swing.JButton();
         PublicarVideoButton = new javax.swing.JButton();
         DeletarVideoButton = new javax.swing.JButton();
+        ListarUsuariosButton = new javax.swing.JButton();
+        ListarVideoButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -48,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(255, 102, 51));
 
         EditarVideoButton.setText("Editar video publicado");
         EditarVideoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +134,20 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        ListarUsuariosButton.setText("Listar todos os usuários");
+        ListarUsuariosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarUsuariosButtonActionPerformed(evt);
+            }
+        });
+
+        ListarVideoButton.setText("Listar todos os videos");
+        ListarVideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarVideoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,7 +180,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AssistirVideoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ListarHistóricoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(ListarHistóricoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .addComponent(CriarUsuárioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RemoverUsuarioButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EditarUsuarioButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -173,6 +189,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(121, 121, 121))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ListarUsuariosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ListarVideoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,9 +223,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(EditarVideoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PesquisarVideoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ListarUsuariosButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ListarVideoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SairButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -220,7 +248,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SairButtonActionPerformed
 
     private void EditarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarUsuarioButtonActionPerformed
-        new EditarUser().setVisible(true);
+        new Autenticacao().setVisible(true);
     }//GEN-LAST:event_EditarUsuarioButtonActionPerformed
 
     private void AssistirVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssistirVideoButtonActionPerformed
@@ -252,13 +280,38 @@ public class MainFrame extends javax.swing.JFrame {
         new ListarHistorico().setVisible(true);
     }//GEN-LAST:event_ListarHistóricoButtonActionPerformed
 
+    private void ListarUsuariosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarUsuariosButtonActionPerformed
+        new ListarUsuarios().setVisible(true);
+    }//GEN-LAST:event_ListarUsuariosButtonActionPerformed
+
+    private void ListarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarVideoButtonActionPerformed
+        new ListarVideos().setVisible(true);
+    }//GEN-LAST:event_ListarVideoButtonActionPerformed
+
 
     public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AssistirVideo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainFrame().setVisible(true);
         });
     }
 
@@ -269,6 +322,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton EditarUsuarioButton;
     private javax.swing.JButton EditarVideoButton;
     private javax.swing.JButton ListarHistóricoButton;
+    private javax.swing.JButton ListarUsuariosButton;
+    private javax.swing.JButton ListarVideoButton;
     private javax.swing.JButton PesquisarVideoButton;
     private javax.swing.JButton PublicarVideoButton;
     private javax.swing.JButton RemoverUsuarioButton;

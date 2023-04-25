@@ -35,6 +35,7 @@ public class DeletarVideo extends javax.swing.JFrame {
         javax.swing.JButton ConcluirDeletarVideoButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        javax.swing.JButton DeletarVideoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +68,13 @@ public class DeletarVideo extends javax.swing.JFrame {
 
         jLabel2.setText("Nome do Vídeo");
 
+        DeletarVideoButton.setText("Deletar");
+        DeletarVideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletarVideoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,15 +90,17 @@ public class DeletarVideo extends javax.swing.JFrame {
                             .addComponent(NomeDeletarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
-                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ConcluirDeletarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SenhaDeletarVideoPasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(EmailDeletarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(DeletarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel3))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SenhaDeletarVideoPasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(EmailDeletarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ConcluirDeletarVideoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,9 +120,11 @@ public class DeletarVideo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(SenhaDeletarVideoPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(ConcluirDeletarVideoButton)
-                .addGap(19, 19, 19))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConcluirDeletarVideoButton)
+                    .addComponent(DeletarVideoButton))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -127,8 +139,15 @@ public class DeletarVideo extends javax.swing.JFrame {
     }//GEN-LAST:event_EmailDeletarVideoTextFieldActionPerformed
 
     private void ConcluirDeletarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConcluirDeletarVideoButtonActionPerformed
+
         dispose();
     }//GEN-LAST:event_ConcluirDeletarVideoButtonActionPerformed
+
+    private void DeletarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarVideoButtonActionPerformed
+        System.out.println("Nome - " + NomeDeletarVideoTextField.getText());
+        System.out.println("Email - " + EmailDeletarVideoTextField.getText());
+        System.out.println("Senha - " + String.valueOf(SenhaDeletarVideoPasswordField.getPassword()));
+    }//GEN-LAST:event_DeletarVideoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,10 +177,8 @@ public class DeletarVideo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DeletarVideo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DeletarVideo().setVisible(true);
         });
     }
 

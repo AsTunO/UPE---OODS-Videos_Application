@@ -28,11 +28,12 @@ public class RemoverUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        NomeRemoverUsuarioTextField = new javax.swing.JTextField();
+        EmailRemoverUsuarioTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        RemoverRemoverUsuarioButton = new javax.swing.JButton();
+        RemoverUsuarioButton = new javax.swing.JButton();
         SenhaRemoverPasswordField = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        ConcluirRemoverUsuarioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,22 +41,30 @@ public class RemoverUser extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Remover Usuário");
 
-        NomeRemoverUsuarioTextField.addActionListener(new java.awt.event.ActionListener() {
+        EmailRemoverUsuarioTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NomeRemoverUsuarioTextFieldActionPerformed(evt);
+                EmailRemoverUsuarioTextFieldActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("Email");
 
-        RemoverRemoverUsuarioButton.setText("Remover");
-        RemoverRemoverUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
+        RemoverUsuarioButton.setText("Remover");
+        RemoverUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoverRemoverUsuarioButtonActionPerformed(evt);
+                RemoverUsuarioButtonActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Senha");
+
+        ConcluirRemoverUsuarioButton.setText("Concluir");
+        ConcluirRemoverUsuarioButton.setToolTipText("");
+        ConcluirRemoverUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConcluirRemoverUsuarioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,22 +75,25 @@ public class RemoverUser extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NomeRemoverUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SenhaRemoverPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(RemoverRemoverUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(RemoverUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ConcluirRemoverUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel2)
+                            .addGap(34, 34, 34)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(EmailRemoverUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SenhaRemoverPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(11, 11, 11)
                     .addComponent(jLabel3)
-                    .addContainerGap(211, Short.MAX_VALUE)))
+                    .addContainerGap(203, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,12 +102,14 @@ public class RemoverUser extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NomeRemoverUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailRemoverUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SenhaRemoverPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
-                .addComponent(RemoverRemoverUsuarioButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RemoverUsuarioButton)
+                    .addComponent(ConcluirRemoverUsuarioButton))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -107,13 +121,19 @@ public class RemoverUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NomeRemoverUsuarioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeRemoverUsuarioTextFieldActionPerformed
+    private void EmailRemoverUsuarioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailRemoverUsuarioTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomeRemoverUsuarioTextFieldActionPerformed
+    }//GEN-LAST:event_EmailRemoverUsuarioTextFieldActionPerformed
 
-    private void RemoverRemoverUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverRemoverUsuarioButtonActionPerformed
+    private void RemoverUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverUsuarioButtonActionPerformed
+        System.out.println("Nome - " + EmailRemoverUsuarioTextField.getText());
+        System.out.println("Senha - " + String.valueOf(SenhaRemoverPasswordField.getPassword()));
+    }//GEN-LAST:event_RemoverUsuarioButtonActionPerformed
+
+    private void ConcluirRemoverUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConcluirRemoverUsuarioButtonActionPerformed
+        // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_RemoverRemoverUsuarioButtonActionPerformed
+    }//GEN-LAST:event_ConcluirRemoverUsuarioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,16 +163,15 @@ public class RemoverUser extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RemoverUser().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new RemoverUser().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField NomeRemoverUsuarioTextField;
-    private javax.swing.JButton RemoverRemoverUsuarioButton;
+    private javax.swing.JButton ConcluirRemoverUsuarioButton;
+    private javax.swing.JTextField EmailRemoverUsuarioTextField;
+    private javax.swing.JButton RemoverUsuarioButton;
     private javax.swing.JPasswordField SenhaRemoverPasswordField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

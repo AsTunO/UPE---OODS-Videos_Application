@@ -36,7 +36,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="cc" type="rgb"/>
+      <Color blue="33" green="66" red="ff" type="rgb"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -92,7 +92,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="AssistirVideoButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="ListarHistóricoButton" alignment="1" pref="275" max="32767" attributes="0"/>
+                  <Component id="ListarHistóricoButton" alignment="1" pref="308" max="32767" attributes="0"/>
                   <Component id="CriarUsuárioButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="RemoverUsuarioButton" alignment="1" max="32767" attributes="0"/>
                   <Component id="EditarUsuarioButton" alignment="1" max="32767" attributes="0"/>
@@ -103,6 +103,16 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ListarUsuariosButton" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ListarVideoButton" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,9 +141,13 @@
               <Component id="EditarVideoButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="PesquisarVideoButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ListarUsuariosButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="ListarVideoButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="SairButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -233,6 +247,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeletarVideoButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ListarUsuariosButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Listar todos os usu&#xe1;rios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListarUsuariosButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ListarVideoButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Listar todos os videos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListarVideoButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

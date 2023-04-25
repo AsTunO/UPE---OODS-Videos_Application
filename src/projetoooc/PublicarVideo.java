@@ -35,6 +35,7 @@ public class PublicarVideo extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         NomePublicarVideoTextField = new javax.swing.JTextField();
         SenhaPublicarVideoPasswordField = new javax.swing.JPasswordField();
+        javax.swing.JButton PublicarVideoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,17 +68,21 @@ public class PublicarVideo extends javax.swing.JFrame {
             }
         });
 
+        PublicarVideoButton.setText("Publicar");
+        PublicarVideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PublicarVideoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(ConcluirPublicarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -92,7 +97,11 @@ public class PublicarVideo extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(EmailPublicarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(NomePublicarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(NomePublicarVideoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PublicarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ConcluirPublicarVideoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +122,9 @@ public class PublicarVideo extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(SenhaPublicarVideoPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
-                .addComponent(ConcluirPublicarVideoButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConcluirPublicarVideoButton)
+                    .addComponent(PublicarVideoButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -125,12 +136,19 @@ public class PublicarVideo extends javax.swing.JFrame {
     }//GEN-LAST:event_EmailPublicarVideoTextFieldActionPerformed
 
     private void ConcluirPublicarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConcluirPublicarVideoButtonActionPerformed
+       
         dispose();
     }//GEN-LAST:event_ConcluirPublicarVideoButtonActionPerformed
 
     private void NomePublicarVideoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomePublicarVideoTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NomePublicarVideoTextFieldActionPerformed
+
+    private void PublicarVideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublicarVideoButtonActionPerformed
+        System.out.println("Nome - " + NomePublicarVideoTextField.getText());
+        System.out.println("Email - " + EmailPublicarVideoTextField.getText());
+        System.out.println("Senha - " + String.valueOf(SenhaPublicarVideoPasswordField.getPassword()));
+    }//GEN-LAST:event_PublicarVideoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,10 +178,8 @@ public class PublicarVideo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PublicarVideo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PublicarVideo().setVisible(true);
         });
     }
 

@@ -33,6 +33,7 @@ public class ListarHistorico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         SenhaListarHistoricoPasswordField = new javax.swing.JPasswordField();
+        ListarHistoricoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,30 +58,37 @@ public class ListarHistorico extends javax.swing.JFrame {
 
         jLabel3.setText("Senha");
 
+        ListarHistoricoButton.setText("Listar");
+        ListarHistoricoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarHistoricoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(ConcluirListarHistoricoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel1)))
+                .addGap(150, 150, 150)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 91, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(36, 36, 36)
-                        .addComponent(SenhaListarHistoricoPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(EmailListarHistoricoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ListarHistoricoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(ConcluirListarHistoricoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(36, 36, 36)
+                            .addComponent(SenhaListarHistoricoPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EmailListarHistoricoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
@@ -97,7 +105,9 @@ public class ListarHistorico extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(SenhaListarHistoricoPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(108, 108, 108)
-                .addComponent(ConcluirListarHistoricoButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ConcluirListarHistoricoButton)
+                    .addComponent(ListarHistoricoButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -109,8 +119,14 @@ public class ListarHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_EmailListarHistoricoTextFieldActionPerformed
 
     private void ConcluirListarHistoricoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConcluirListarHistoricoButtonActionPerformed
+        
         dispose();
     }//GEN-LAST:event_ConcluirListarHistoricoButtonActionPerformed
+
+    private void ListarHistoricoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarHistoricoButtonActionPerformed
+        System.out.println("Email - " + EmailListarHistoricoTextField.getText());
+        System.out.println("Senha - " + String.valueOf(SenhaListarHistoricoPasswordField.getPassword()));
+    }//GEN-LAST:event_ListarHistoricoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,16 +157,15 @@ public class ListarHistorico extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListarHistorico().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ListarHistorico().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConcluirListarHistoricoButton;
     private javax.swing.JTextField EmailListarHistoricoTextField;
+    private javax.swing.JButton ListarHistoricoButton;
     private javax.swing.JPasswordField SenhaListarHistoricoPasswordField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
