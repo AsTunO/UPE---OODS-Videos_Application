@@ -1,63 +1,34 @@
 package Videos.Utilities;
 
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
+import java.util.InputMismatchException;
 
-public class Utils implements InterfaceUtils {
+public class Utils {
+    static Scanner sc;
 
-    public String inputStringField() {
-        Scanner sc = new Scanner(System.in);
+    public static void setScanner(Scanner s) {
+        sc = s;
+    }
+
+    public static String inputStringField() {
         String field = "";
 
-        System.out.println("> ");
-
         do {
-            field = sc.nextLine().strip().replace("\n", "");
-            sc.nextLine();
+            System.out.print("> ");
+            field = sc.nextLine();
             if (field == null || field == "")
                 System.out.println("Entrada não pode ser vazia, tente novamente.\n");
         } while (field == null || field == "");
 
-        sc.close();
         return field;
     }
 
-    public String inputStringField(String fieldName) {
-        Scanner sc = new Scanner(System.in);
-        String field = "";
-
-        System.out.println("Digite o " + fieldName + ": ");
-        do {
-            field = sc.nextLine().strip().replace("\n", "");
-            sc.nextLine();
-            if (field == null || field == "")
-                System.out.println("Entrada não pode ser vazia, tente novamente.\n");
-        } while (field == null || field == "");
-
-        sc.close();
-        return field;
-    }
-
-    public String inputStringField(String fieldName, String location) {
-        Scanner sc = new Scanner(System.in);
-        String field = "";
-
-        System.out.println("Digite o " + fieldName + " do " + location + ": ");
-        do {
-            field = sc.nextLine().strip().replace("\n", "");
-            sc.nextLine();
-            if (field == null || field == "")
-                System.out.println("Entrada não pode ser vazia, tente novamente.\n");
-        } while (field == null || field == "");
-
-        sc.close();
-        return field;
-    }
-
-    public int inputAgeField(String fieldName, String location) {
-        Scanner sc = new Scanner(System.in);
+    public static int inputAgeField() {
         int field = 0;
 
-        System.out.println("Digite o " + fieldName + " do " + location + ": ");
+        System.out.print("> ");
         do {
             field = sc.nextInt();
             sc.nextLine();
@@ -65,12 +36,10 @@ public class Utils implements InterfaceUtils {
                 System.out.println("A idade está inválida, tente novamente.\n");
         } while (field <= 0);
 
-        sc.close();
         return field;
     }
 
-    public String validateEmail(String email) {
-        Scanner sc = new Scanner(System.in);
+    public static String validateEmail(String email) {
 
         while (!email.contains("@")) {
             System.out.println("Email inserido não é válido, por favor, tente novamente.\n> ");
@@ -78,7 +47,42 @@ public class Utils implements InterfaceUtils {
             sc.nextLine();
         }
 
-        sc.close();
         return email;
+    }
+
+    public static Integer optionSelector() {
+        int option = -1;
+        List<Integer> validValues = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+
+        while (true) {
+            try {
+                System.out.print("> ");
+                option = sc.nextInt();
+                sc.nextLine();
+
+                if (validValues.contains(option)) {
+                    return option;
+                }
+
+                System.out.println("Opção inválida, tente novamente.");
+
+            } catch (InputMismatchException e) {
+                System.out.println("A entrada precisa ser um inteiro.");
+                option = -1;
+                sc.nextLine();
+            }
+        }
+    }
+
+    public static boolean chooseYesOrNo() {
+        boolean result = false;
+
+        System.out.print("> ");
+
+        if (sc.nextLine().equalsIgnoreCase("S")) {
+            result = true;
+        }
+
+        return result;
     }
 }

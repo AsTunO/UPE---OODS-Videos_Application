@@ -1,6 +1,5 @@
 package Videos.Controllers;
 
-import java.util.Scanner;
 import Videos.Models.*;
 import Videos.Repositories.*;
 import Videos.Exceptions.*;
@@ -14,162 +13,145 @@ public class UserController implements InterfaceUserController {
     }
 
     public void add() throws InvalidEmailException, UserAlreadyExistsException {
-        Scanner sc = new Scanner(System.in);
-        InterfaceUtils ut = new Utils();
-
         User newUser;
-        String name = ut.inputStringField("nome", "usuário");
-        String email = ut.inputStringField("email", "usuário");
-        String password = ut.inputStringField("senha", "usuário");
-        int age = ut.inputAgeField("idade", "usuário");
 
-        while (collection.searchByEmail(email) != null) {
-            System.out.println("Já existe uma conta com esse email, por favor, tente novamente.\n> ");
-            email = sc.nextLine().strip().replace("\n", "");
-            sc.nextLine();
+        System.out.println("Digite o email do usuário:");
+        String email = Utils.validateEmail(Utils.inputStringField());
+
+        if (collection.searchByEmail(email) != null) {
+            throw new UserAlreadyExistsException("Já existe um usuário com o email informado.");
         }
+
+        System.out.println("Digite o nome do usuário:");
+        String name = Utils.inputStringField();
+
+        System.out.println("Digite a senha do usuário:");
+        String password = Utils.inputStringField();
+
+        System.out.println("Digite a idade do usuário:");
+        int age = Utils.inputAgeField();
 
         System.out.println("Você deseja que esse usuário possa publicar vídeos?");
         System.out.println("Digite S para sim, qualquer outro caractere para não.");
 
-        String option = sc.nextLine().strip().replace("\n", "");
-        if (option.equalsIgnoreCase("S")) {
+        if (Utils.chooseYesOrNo()) {
             newUser = new Publisher(name, age, email, password);
         } else {
             newUser = new Spectator(name, age, email, password);
         }
-        System.out.println("Usuário adicionado com sucesso.");
-        sc.close();
 
-        try {
-            collection.addUser(newUser);
-        } catch (UserAlreadyExistsException e) {
-            throw e;
-        }
+        collection.addUser(newUser);
+        System.out.println("Usuário adicionado com sucesso.");
     }
 
-    @Override
-    public void rem() throws InvalidEmailException, UserDontExistsException {
-        Scanner sc = new Scanner(System.in);
-        InterfaceUtils ut = new Utils();
-
+    public void rem() throws InvalidEmailException, UnauthorizedException {
         System.out.println("Digite o email do usuário a ser removido: ");
-        String email = ut.inputStringField();
+        String email = Utils.validateEmail(Utils.inputStringField());
 
-        sc.nextLine();
-
-        while (collection.searchByEmail(email) == null) {
-            System.out.println("Não existe uma conta com esse email, por favor, tente novamente.\n> ");
-            email = sc.nextLine().strip().replace("\n", "");
-            sc.nextLine();
-        }
-
-        sc.close();
+        System.out.println("Digite a senha do usuário a ser removido: ");
+        String password = Utils.inputStringField();
 
         User u = collection.searchByEmail(email);
-        try {
-            collection.remUser(u);
-            System.out.println("Usuário removido com sucesso.");
-        } catch (UserDontExistsException e) {
-            System.out.println("O usuário que você tentou remover não existe no banco de dados.");
+
+        if (u == null || !(u.validatePassword(password))) {
+            throw new UnauthorizedException("Dados inválidos.");
         }
+
+        collection.remUser(u);
+        System.out.println("Usuário removido com sucesso.");
     }
 
-    @Override
-    public void edit() throws InvalidEmailException, UserDontExistsException {
-        Scanner sc = new Scanner(System.in);
-        InterfaceUtils ut = new Utils();
-
-        User u;
+    public void edit() throws InvalidEmailException, UnauthorizedException {
+        User oldUser, updatedUser;
         String name, email, pass;
         int age;
 
         System.out.println("Digite o email do usuário a ser alterado: ");
-        email = ut.validateEmail(ut.inputStringField());
+        email = Utils.validateEmail(Utils.inputStringField());
         System.out.println("Digite a senha do usuário: ");
-        pass = ut.inputStringField();
-        while (collection.searchByEmail(email) == null
-                || collection.searchByEmail(email).validatePassword(pass)) {
-            System.out.println("Dados inválidos, por favor, tente novamente.\n> ");
-            email = ut.validateEmail(ut.inputStringField());
-            pass = ut.inputStringField();
+        pass = Utils.inputStringField();
+
+        oldUser = collection.searchByEmail(email);
+
+        if (oldUser instanceof Publisher) {
+            updatedUser = new Publisher(oldUser.getName(), oldUser.getAge(), oldUser.getEmail(), pass);
+        } else {
+            updatedUser = new Spectator(oldUser.getName(), oldUser.getAge(), oldUser.getEmail(), pass);
         }
 
-        u = collection.searchByEmail(email);
+        if (oldUser == null || !(oldUser.validatePassword(pass))) {
+            throw new UnauthorizedException("Dados inválidos.");
+        }
 
         System.out.println("\nDigite S para sim, qualquer outro caractere para não.");
+
         System.out.println("\nVocê deseja editar o email? ");
-        if (sc.nextLine().strip().replace("\n", "").equalsIgnoreCase("S")) {
+        if (Utils.chooseYesOrNo()) {
             do {
-                email = ut.validateEmail(ut.inputStringField("email", "usuário"));
+                System.out.println("Digite o novo email do usuário:");
+                email = Utils.validateEmail(Utils.inputStringField());
                 if (collection.searchByEmail(email) != null) {
                     System.out.println("Email já existente na base de dados, tente novamente.");
                 }
             } while (collection.searchByEmail(email) != null);
-            u.setEmail(email, pass);
+            updatedUser.setEmail(email, pass);
         }
-        sc.nextLine();
 
         System.out.println("\nVocê deseja editar o nome? ");
-        if (sc.nextLine().strip().replace("\n", "").equalsIgnoreCase("S")) {
-            name = ut.inputStringField("nome", "usuário");
-            u.setName(name, pass);
+        if (Utils.chooseYesOrNo()) {
+            System.out.println("Digite o novo nome do usuário:");
+            name = Utils.inputStringField();
+            updatedUser.setName(name, pass);
         }
-        sc.nextLine();
 
         System.out.println("\nVocê deseja editar a senha? ");
-        if (sc.nextLine().strip().replace("\n", "").equalsIgnoreCase("S")) {
-            String newPassword = ut.inputStringField("senha", "usuário");
-            u.setPassword(newPassword, pass);
+        if (Utils.chooseYesOrNo()) {
+            System.out.println("Digite a nova senha do usuário:");
+            String newPassword = Utils.inputStringField();
+            updatedUser.setPassword(newPassword, pass);
             pass = newPassword;
         }
-        sc.nextLine();
 
         System.out.println("\nVocê deseja editar a idade? ");
-        if (sc.nextLine().strip().replace("\n", "").equalsIgnoreCase("S")) {
-            age = ut.inputAgeField("idade", "usuário");
-            u.setAge(age, pass);
+        if (Utils.chooseYesOrNo()) {
+            System.out.println("Digite a nova idade do usuário:");
+            age = Utils.inputAgeField();
+            updatedUser.setAge(age, pass);
         }
-        sc.nextLine();
-        sc.close();
 
-        collection.editUser(u);
+        collection.editUser(oldUser, updatedUser);
         System.out.println("Usuário editado com sucesso.");
     }
 
-    @Override
-    public void watchVideo() throws InvalidEmailException, UserDontExistsException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'watchVideo'");
+    public void watchVideo(User u, Video v) {
+        collection.watchVideo(u, v);
     }
 
-    @Override
-    public void listHistory() throws InvalidEmailException, UserDontExistsException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listHistory'");
+    public void listAllUsers() {
+        if (collection.isEmpty()) {
+            System.out.println("Não existe nenhum usuário no sistema.");
+        } else {
+            collection.listAllUsers();
+        }
     }
 
-    @Override
-    public void publishVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'publishVideo'");
+    public User searchByEmail(String email) {
+        return collection.searchByEmail(email);
     }
 
-    @Override
-    public void deleteVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteVideo'");
-    }
+    public User authenticate() throws UnauthorizedException {
+        System.out.println("Digite o email do usuário: ");
+        String email = Utils.validateEmail(Utils.inputStringField());
 
-    @Override
-    public void editVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editVideo'");
-    }
+        User u = searchByEmail(email);
 
-    @Override
-    public void searchVideos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchVideos'");
+        System.out.println("Digite a senha do usuário: ");
+        String password = Utils.inputStringField();
+
+        if (u == null || !(u.validatePassword(password))) {
+            throw new UnauthorizedException();
+        }
+
+        return u;
     }
 }

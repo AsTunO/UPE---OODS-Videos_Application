@@ -2,9 +2,8 @@ package Videos.Repositories;
 
 import java.util.List;
 import java.util.ArrayList;
-import Videos.Exceptions.UserDontExistsException;
 import Videos.Models.User;
-import Videos.Exceptions.UserAlreadyExistsException;
+import Videos.Models.Video;
 
 public class UsersRepository implements InterfaceUsersRepository {
     private List<User> collection = new ArrayList<User>();
@@ -13,7 +12,7 @@ public class UsersRepository implements InterfaceUsersRepository {
         User u = null;
 
         for (int i = 0; i < collection.size(); i++) {
-            if (collection.get(i).getEmail() == email) {
+            if (collection.get(i).getEmail().equals(email)) {
                 u = collection.get(i);
             }
         }
@@ -21,41 +20,34 @@ public class UsersRepository implements InterfaceUsersRepository {
         return u;
     }
 
-    public void addUser(User u) throws UserAlreadyExistsException {
-        try {
-            if (searchByEmail(u.getEmail()) != null) {
-                throw new UserAlreadyExistsException();
-            }
-            collection.add(u);
-        } catch (Exception e) {
-            throw e;
+    public void addUser(User u) {
+        collection.add(u);
+    }
+
+    public void remUser(User u) {
+        collection.remove(u);
+    }
+
+    public void editUser(User oldUser, User updatedUser) {
+        collection.remove(oldUser);
+        collection.add(updatedUser);
+    }
+
+    public void listAllUsers() {
+        System.out.println("------------------------------------");
+        for (User u : collection) {
+            System.out.println(u);
+            System.out.println("------------------------------------");
         }
     }
 
-    public void remUser(User u) throws UserDontExistsException {
-        try {
-            if (searchByEmail(u.getEmail()) == null) {
-                throw new UserDontExistsException();
-            }
-            collection.remove(u);
-        } catch (Exception e) {
-            throw e;
-        }
+    public void watchVideo(User u, Video v) {
+        collection.remove(u);
+        u.watch(v);
+        collection.add(u);
     }
 
-    public void editUser(User updatedUser) throws UserDontExistsException {
-        try {
-            for (int i = 0; i < collection.size(); i++) {
-                if (collection.get(i).getEmail() == updatedUser.getEmail()) {
-                    collection.remove(i);
-                    collection.add(i, updatedUser);
-                    return;
-                }
-            }
-
-            throw new UserDontExistsException();
-        } catch (Exception e) {
-            throw e;
-        }
+    public boolean isEmpty() {
+        return collection.isEmpty();
     }
 }

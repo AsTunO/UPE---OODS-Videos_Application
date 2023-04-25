@@ -1,6 +1,9 @@
 package Videos.Models;
 
+import java.util.ArrayList;
+import java.util.List;
 import Videos.Exceptions.*;
+import Videos.Models.Video;
 
 public abstract class User {
 
@@ -8,16 +11,13 @@ public abstract class User {
     private String email;
     private String password;
     private int age;
+    private List<Video> watchedVideos = new ArrayList<Video>();
 
     // Constructor using all fields
     public User(String name, int age, String email, String password) throws InvalidEmailException {
         this.name = name;
         this.age = age;
-        if (email.contains("@")) {
-            this.email = email;
-        } else {
-            throw new InvalidEmailException();
-        }
+        this.email = email;
         this.password = password;
     }
 
@@ -25,11 +25,25 @@ public abstract class User {
     public boolean validatePassword(String pass) {
         boolean result = false;
 
-        if (pass == this.password) {
+        if (this.password.equals(pass)) {
             result = true;
         }
 
         return result;
+    }
+
+    public void watch(Video v) {
+        watchedVideos.add(v);
+    }
+
+    public void listHistory() {
+        if (watchedVideos.isEmpty()) {
+            System.out.println("O usuário não assistiu nenhum vídeo.");
+        } else {
+            for (Video v : watchedVideos) {
+                System.out.println(v);
+            }
+        }
     }
 
     // Boilerplate Code
@@ -81,8 +95,6 @@ public abstract class User {
                 " name='" + getName() + "'" +
                 ", age='" + getAge() + "'" +
                 ", email='" + getEmail() + "'" +
-                ", password='" + "hidden" + "'" +
                 "}";
     }
-
 }

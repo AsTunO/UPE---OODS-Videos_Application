@@ -1,23 +1,20 @@
 package Videos.Controllers;
 
 import Videos.Exceptions.*;
+import Videos.Models.*;
 
 public interface InterfaceUserController {
     public void add() throws InvalidEmailException, UserAlreadyExistsException;
 
-    public void rem() throws InvalidEmailException, UserDontExistsException;
+    public void rem() throws InvalidEmailException, UnauthorizedException;
 
-    public void edit() throws InvalidEmailException, UserDontExistsException;
+    public void edit() throws InvalidEmailException, UnauthorizedException;
 
-    public void watchVideo() throws InvalidEmailException, UserDontExistsException;
+    public void watchVideo(User u, Video v);
 
-    public void listHistory() throws InvalidEmailException, UserDontExistsException;
+    public void listAllUsers();
 
-    public void publishVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException;
+    public User searchByEmail(String email);
 
-    public void deleteVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException;
-
-    public void editVideo() throws InvalidEmailException, UserDontExistsException, UserNotPublisherException;
-
-    public void searchVideos();
+    public User authenticate() throws UnauthorizedException;
 }

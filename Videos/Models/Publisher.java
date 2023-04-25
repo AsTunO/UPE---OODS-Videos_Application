@@ -6,27 +6,19 @@ import java.util.List;
 import Videos.Exceptions.InvalidEmailException;
 
 public class Publisher extends User {
+    private List<Video> publishedVideos = new ArrayList<Video>();
 
-    private List<String> publishedVideos = new ArrayList<String>();
-
-    public Publisher(String name, int age, String email, String password) throws InvalidEmailException { // Constructor
-                                                                                                         // using all
-                                                                                                         // fields
+    // Constructor using all fields
+    public Publisher(String name, int age, String email, String password) throws InvalidEmailException {
         super(name, age, email, password);
     }
 
-    public Boolean publishNewVideo(String videoName, String pass) {
-        if (validatePassword(pass)) {
-            publishedVideos.add(videoName);
-            return true;
-        } else {
-            return false;
-        }
+    public void publishNewVideo(Video v, String pass) {
+        publishedVideos.add(v);
     }
 
     // Boilerplate Code
-
-    public List<String> getPublishedHistoric() {
+    public List<Video> getPublishedHistoric() {
         return publishedVideos;
     }
 

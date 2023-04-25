@@ -1,16 +1,20 @@
 package Videos.Repositories;
 
-import Videos.Exceptions.*;
 import Videos.Models.User;
+import Videos.Models.Video;
 
 public interface InterfaceUsersRepository {
-
     public User searchByEmail(String email);
 
-    public void addUser(User u) throws UserAlreadyExistsException;
+    public void addUser(User u);
 
-    public void remUser(User u) throws UserDontExistsException;
+    public void remUser(User u);
 
-    public void editUser(User updatedUser) throws UserDontExistsException;
+    public void editUser(User oldUser, User updatedUser);
 
+    public void listAllUsers();
+
+    public void watchVideo(User u, Video v);
+
+    public boolean isEmpty();
 }
