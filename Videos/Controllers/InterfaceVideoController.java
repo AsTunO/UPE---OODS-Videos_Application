@@ -8,11 +8,13 @@ public interface InterfaceVideoController {
 
     public void publishVideo(User u) throws VideoAlreadyExistsException;
 
-    void rem(User u) throws VideoDontExistsException;
+    void rem(User u) throws VideoDontExistsException, UnauthorizedException;
 
-    public void edit(User u) throws VideoDontExistsException;
+    public void edit(User u) throws VideoDontExistsException, UnauthorizedException;
 
     public void listAllVideos();
 
     public Video findVideoByName(String videoName);
+
+    public void listAllVideosDB();
 }

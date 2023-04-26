@@ -2,6 +2,9 @@ package Videos.Controllers;
 
 import Videos.Models.*;
 import Videos.Repositories.*;
+
+import java.sql.SQLException;
+
 import Videos.Exceptions.*;
 import Videos.Utilities.*;
 
@@ -41,6 +44,11 @@ public class UserController implements InterfaceUserController {
         }
 
         collection.addUser(newUser);
+        try {
+            collection.addUserDB(newUser);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados");
+        }
         System.out.println("Usuário adicionado com sucesso.");
     }
 
@@ -58,6 +66,11 @@ public class UserController implements InterfaceUserController {
         }
 
         collection.remUser(u);
+        try {
+            collection.remUserDB(u);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados");
+        }
         System.out.println("Usuário removido com sucesso.");
     }
 
@@ -94,32 +107,36 @@ public class UserController implements InterfaceUserController {
                     System.out.println("Email já existente na base de dados, tente novamente.");
                 }
             } while (collection.searchByEmail(email) != null);
-            updatedUser.setEmail(email, pass);
+            updatedUser.setEmail(email);
         }
 
         System.out.println("\nVocê deseja editar o nome? ");
         if (Utils.chooseYesOrNo()) {
             System.out.println("Digite o novo nome do usuário:");
             name = Utils.inputStringField();
-            updatedUser.setName(name, pass);
+            updatedUser.setName(name);
         }
 
         System.out.println("\nVocê deseja editar a senha? ");
         if (Utils.chooseYesOrNo()) {
             System.out.println("Digite a nova senha do usuário:");
-            String newPassword = Utils.inputStringField();
-            updatedUser.setPassword(newPassword, pass);
-            pass = newPassword;
+            pass = Utils.inputStringField();
+            updatedUser.setPassword(pass);
         }
 
         System.out.println("\nVocê deseja editar a idade? ");
         if (Utils.chooseYesOrNo()) {
             System.out.println("Digite a nova idade do usuário:");
             age = Utils.inputAgeField();
-            updatedUser.setAge(age, pass);
+            updatedUser.setAge(age);
         }
 
         collection.editUser(oldUser, updatedUser);
+        try {
+            collection.editUserDB(oldUser, updatedUser);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados");
+        }
         System.out.println("Usuário editado com sucesso.");
     }
 
@@ -131,7 +148,12 @@ public class UserController implements InterfaceUserController {
         if (collection.isEmpty()) {
             System.out.println("Não existe nenhum usuário no sistema.");
         } else {
-            collection.listAllUsers();
+            // collection.listAllUsers();
+            try {
+                collection.listAllUsersDB();
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("Erro ao se conectar com o banco de dados");
+            }
         }
     }
 

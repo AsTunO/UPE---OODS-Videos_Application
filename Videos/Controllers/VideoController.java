@@ -5,6 +5,7 @@ import Videos.Repositories.*;
 import Videos.Exceptions.*;
 import Videos.Models.*;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class VideoController implements InterfaceVideoController {
@@ -29,10 +30,15 @@ public class VideoController implements InterfaceVideoController {
         Video v = new Video(videoName, u);
 
         repository.addVideo(v);
+        try {
+            repository.addVideoDB(v);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados.");
+        }
         System.out.println("Vídeo publicado com sucesso.");
     }
 
-    public void rem(User u) throws VideoDontExistsException {
+    public void rem(User u) throws VideoDontExistsException, UnauthorizedException {
         System.out.println("Digite o nome do vídeo a ser removido");
         String videoName = Utils.inputStringField();
 
@@ -42,14 +48,20 @@ public class VideoController implements InterfaceVideoController {
             throw new VideoDontExistsException();
         }
 
-        if (v.getPublisher() != u) {
-            // TODO check if the validated user is the publisher of the video
+        if (!Objects.equals(v.getPublisher().getEmail(), u.getEmail())) {
+            throw new UnauthorizedException();
         }
 
         repository.remVideo(v);
+        try {
+            repository.remVideoDB(v);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados.");
+        }
+        System.out.println("Vídeo removido com sucesso.");
     }
 
-    public void edit(User u) throws VideoDontExistsException {
+    public void edit(User u) throws VideoDontExistsException, UnauthorizedException {
         System.out.println("Digite o nome do vídeo a ser editado");
         String videoName = Utils.inputStringField();
 
@@ -60,19 +72,25 @@ public class VideoController implements InterfaceVideoController {
         }
 
         if (!Objects.equals(v.getPublisher().getEmail(), u.getEmail())) {
-            // TODO check if the validated user is the publisher of the video
-            throw new UnsupportedOperationException("the video publisher is not the user");
+            throw new UnauthorizedException();
         }
 
         Video newV = new Video(v.getName(), v.getPublisher(), v.getPublishedDate());
 
         System.out.println("Você deseja editar o nome do vídeo?");
         if (Utils.chooseYesOrNo()) {
+            System.out.println("Digite o novo nome do vídeo:");
             videoName = Utils.inputStringField();
             newV.setName(videoName);
         }
 
         repository.editVideo(v, newV);
+        try {
+            repository.editVideoDB(v, newV);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao se conectar com o banco de dados.");
+        }
+        System.out.println("Vídeo editado com sucesso.");
     }
 
     public void listAllVideos() {
@@ -80,6 +98,18 @@ public class VideoController implements InterfaceVideoController {
             System.out.println("Não existe nenhum vídeo publicado.");
         } else {
             repository.listAllVideos();
+        }
+    }
+
+    public void listAllVideosDB() {
+        if (repository.isEmpty()) {
+            System.out.println("Não existe nenhum vídeo publicado.");
+        } else {
+            try {
+                repository.listAllVideosDB();
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("Erro ao se conectar com o banco de dados.");
+            }
         }
     }
 

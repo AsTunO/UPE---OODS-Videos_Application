@@ -19,7 +19,7 @@ public class Terminal {
         Scanner sc = new Scanner(System.in);
         Utils.setScanner(sc);
         InterfaceUserController usersController = new UserController(new UsersRepository());
-        InterfaceVideoController videosController = new VideoController(new VideoRepository());
+        InterfaceVideoController videosController = new VideoController(new VideoRepository(usersController));
 
         int opt = -1;
 
@@ -150,7 +150,7 @@ public class Terminal {
                     }
                     break;
                 }
-                case 9:{
+                case 9: {
                     try {
                         System.out.println("Digite um termo para busca: ");
                         String name = Utils.inputStringField();
@@ -166,7 +166,7 @@ public class Terminal {
                     break;
                 }
                 case 11: {
-                    videosController.listAllVideos();
+                    videosController.listAllVideosDB();
                     break;
                 }
                 case 12: {
@@ -189,7 +189,7 @@ public class Terminal {
         System.out.println("Digite 8 para editar um vídeo publicado.");
         System.out.println("Digite 9 para pesquisar um vídeo.");
         System.out.println("Digite 10 para listar todos os usuários.");
-        System.out.println("Digite 11 para listar todos os vídeos");
+        System.out.println("Digite 11 para listar todos os vídeos.");
         System.out.println("Digite 12 para exibir esse menu novamente.");
         System.out.println("Digite 0 para encerrar o programa.");
         System.out.println("----------------------------------------");

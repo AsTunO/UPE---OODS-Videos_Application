@@ -1,8 +1,5 @@
 package Videos.Models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Videos.Exceptions.InvalidEmailException;
 
 public class Spectator extends User {

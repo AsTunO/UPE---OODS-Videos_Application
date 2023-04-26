@@ -1,4 +1,5 @@
 package Videos;
+
 import static Videos.Views.Terminal.terminalInterface;
 
 public class Main {

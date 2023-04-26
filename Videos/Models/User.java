@@ -1,9 +1,12 @@
 package Videos.Models;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import Videos.Exceptions.*;
-import Videos.Models.Video;
 
 public abstract class User {
 
@@ -18,18 +21,40 @@ public abstract class User {
         this.name = name;
         this.age = age;
         this.email = email;
-        this.password = password;
+        this.password = encodeString(password);
     }
 
     // function to authenticate the user
     public boolean validatePassword(String pass) {
         boolean result = false;
 
-        if (this.password.equals(pass)) {
+        if (encodeString(pass).equals(password)) {
             result = true;
         }
 
         return result;
+    }
+
+    public String encodeString(String str) {
+        String encodedStr = null;
+
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+
+            byte[] hashedStr = md.digest(str.getBytes(StandardCharsets.UTF_8));
+            encodedStr = new String(hashedStr, StandardCharsets.UTF_8);
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return str;
     }
 
     public void watch(Video v) {
@@ -53,40 +78,32 @@ public abstract class User {
         return this.name;
     }
 
-    public void setName(String name, String pass) {
-        if (validatePassword(pass)) {
-            this.name = name;
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
         return this.age;
     }
 
-    public void setAge(int age, String pass) {
-        if (validatePassword(pass)) {
-            if (age > 0) {
-                this.age = age;
-            } else {
-                this.age = 0;
-            }
-        }
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email, String pass) {
-        if (validatePassword(pass)) {
-            this.email = email;
-        }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setPassword(String newPass, String pass) {
-        if (validatePassword(pass)) {
-            this.password = newPass;
-        }
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String newPass) {
+        this.password = encodeString(newPass);
     }
 
     @Override
